@@ -1,36 +1,41 @@
-pipeline{
-    agent{
-        label "my-ssh-slave"
+pipeline {
+
+    agent {
+        label '<your_label>'
     }
+
     tools {
-         nodejs 'nodejs'
+        nodejs 'nodejs'
     }
+
     stages {
-        stage("Clone Repo") {
+
+        stage('Clean') {
             steps {
-                git branch: 'main', url: 'https://github.com/ZafirZafirov/nodejs-my-proj.git'
+                cleanWs()
             }
         }
-        stage("Build") {
+
+        stage('Clone Repo') {
             steps {
-                sh "npm ci"
+                git branch: 'main', url: 'https://github.com/stoenpav/nodejs-my-proj.git'
             }
         }
-        stage("Test") {
+        stage('Build') {
             steps {
-                sh "npm test"
+                sh 'npm ci' //This is for building the nodejs project
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'npm test' //This is for testing the nodejs modules
             }
         }
         stage('Deploy') {
            steps {
-                sh "npm install -g forever"
+                sh 'npm install -g forever'
                 sh 'forever start src/index.js'
            }
-        }
-    }
-    post {
-        always {
-            cleanWs()
         }
     }
 }
