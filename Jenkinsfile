@@ -4,7 +4,7 @@ pipeline {
     }
     tools {
         nodejs 'NodeJS'
-        dockerTool 'Docker'
+        dockerTool 'Docker_installations'
     }
     triggers {
         githubPush()
