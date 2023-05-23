@@ -1,6 +1,6 @@
 pipeline{
     agent{
-        label "docker_slave_666"
+        label "my-ssh-slave"
     }
     tools {
          nodejs 'nodejs'
@@ -20,6 +20,12 @@ pipeline{
             steps {
                 sh "npm test"
             }
+        }
+        stage('Deploy') {
+           steps {
+                sh "npm install -g forever"
+                sh 'forever start src/index.js'
+           }
         }
     }
 }
