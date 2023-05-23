@@ -3,7 +3,7 @@ pipeline {
         label 'my-ssh-slave'
     }
     tools {
-        nodejs 'NodeJS'
+        nodejs 'nodejs'
         dockerTool 'Docker_installations'
     }
     triggers {
