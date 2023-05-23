@@ -7,6 +7,9 @@ pipeline {
     tools {
         nodejs 'nodejs'
     }
+    triggers {
+        githubPush()
+    }
 
     stages {
 
