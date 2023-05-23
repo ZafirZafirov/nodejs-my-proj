@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label 'my-ssh-agent-1'
+        label 'my-ssh-slave'
     }
     tools {
         nodejs 'NodeJS'
@@ -10,7 +10,7 @@ pipeline {
         githubPush()
     }
     environment {
-      DOCKERHUB_CREDENTIALS = credentials('zafirzafirov')
+      DOCKERHUB_CREDENTIALS = credentials('my_dockerhub_creds')
       IMAGE_NAME = 'zafirzafirov/mynodejsapp'
     }
     stages {
